@@ -1,127 +1,158 @@
+// src/pages/index.js
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
 import Layout from "../components/layout"
+import Navigation from "../components/Navigation"
+import SocialLinks from "../components/SocialLinks"
+import About from "../components/About"
+import Education from "../components/Education"
+import Skills from "../components/Skills"
+import Projects from "../components/Projects"
+import HeroSection from "../components/HeroSection"
 import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
-
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
-
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
-
-const moreLinks = [
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
-
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
 
 const IndexPage = () => (
   <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
+    <div style={{
+      backgroundColor: '#0f172a',
+      color: '#94a3b8',
+      fontFamily: '"Inter", sans-serif',
+      position: 'relative'
+    }}>
+      
+      {/* Hero Section - 全屏固定 */}
+      <HeroSection />
+      
+      {/* 主要内容区域 - 在 Hero Section 下方 */}
+      <div style={{
+        marginTop: '100vh', // 给 Hero Section 留出空间
+        minHeight: '100vh',
+        position: 'relative',
+        zIndex: 10,
+        backgroundColor: '#0f172a' // 确保背景色一致
+      }}>
+        
+        {/* 外层容器 - 响应式最大宽度 */}
+        <div style={{
+          maxWidth: '100%',
+          margin: '0 auto',
+          minHeight: '100vh',
+          paddingLeft: 'clamp(1rem, 5vw, 4rem)', // 响应式左边距
+          paddingRight: 'clamp(1rem, 5vw, 4rem)' // 响应式右边距
+        }}>
+          
+          {/* 内容容器 - 限制最大宽度 */}
+          <div style={{
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
+            
+            {/* 主容器 - Flexbox 布局 */}
+            <div className="main-layout">
+              
+              {/* 左侧固定头部区域 38% 宽度 - 在移动端隐藏 */}
+              <header className="sidebar">
+                
+                {/* 头部内容和导航 */}
+                <Navigation />
+                
+                {/* 底部社交媒体链接 */}
+                <SocialLinks />
+                
+              </header>
+              
+              {/* 右侧主内容区域 62% 宽度 - 在移动端占据全宽 */}
+              <main className="main-content">
+                
+                {/* 各个内容区域 */}
+                <About />
+                <Education />
+                <Skills />
+                <Projects />
+                
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 响应式样式 */}
+      <style jsx>{`
+        .main-layout {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          min-height: 100vh;
+        }
+
+        .sidebar {
+          position: sticky;
+          top: 0;
+          display: flex;
+          max-height: 100vh;
+          width: 38%;
+          flex-direction: column;
+          justify-content: space-between;
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+          padding-left: 1rem;
+          padding-right: 2rem;
+        }
+
+        .main-content {
+          padding-top: 6rem;
+          width: 62%;
+          padding-left: 2rem;
+          padding-right: 1rem;
+          padding-bottom: 6rem;
+        }
+
+        /* 移动端响应式设计 */
+        @media (max-width: 768px) {
+          .main-layout {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          .sidebar {
+            display: none; /* 在小屏设备上完全隐藏左侧导航 */
+          }
+
+          .main-content {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 2rem; /* 减少顶部 padding */
+            padding-bottom: 2rem;
+          }
+        }
+
+        /* 平板端响应式设计 */
+        @media (max-width: 1024px) and (min-width: 769px) {
+          .sidebar {
+            width: 35%;
+            padding-left: 0.5rem;
+            padding-right: 1rem;
+          }
+
+          .main-content {
+            width: 65%;
+            padding-left: 1rem;
+            padding-right: 0.5rem;
+          }
+        }
+
+        /* 超小屏设备优化 */
+        @media (max-width: 480px) {
+          .main-content {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+          }
+        }
+      `}</style>
     </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
   </Layout>
 )
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
+export const Head = () => <Seo title="李元基 - 全栈开发者" />
 
 export default IndexPage
