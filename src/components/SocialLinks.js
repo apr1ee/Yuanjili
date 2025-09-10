@@ -25,7 +25,7 @@ const SocialLinks = () => {
     },
     { 
       name: 'WeChat', 
-      content: 'lyj16621693508',
+      content: 'leeapr0528',
       popup: true
     },
     { 
@@ -174,7 +174,7 @@ const SocialLinks = () => {
       )}
 
       {/* 弹窗模态框 - 使用 Portal */}
-      {showModal && createPortal(
+      {showModal && typeof document !== 'undefined' && createPortal(
         <div style={{
           position: 'fixed',
           top: 0,
