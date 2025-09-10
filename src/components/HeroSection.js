@@ -3,25 +3,43 @@ import React, { useState, useEffect } from "react"
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0)
+  const [windowHeight, setWindowHeight] = useState(0)
 
   useEffect(() => {
+    // 只在客户端执行
+    if (typeof window === 'undefined') return
+
+    // 设置初始窗口高度
+    setWindowHeight(window.innerHeight)
+
     const handleScroll = () => {
       setScrollY(window.scrollY)
     }
 
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight)
+    }
+
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   // 计算透明度和变换，在滚动 100vh 时完全消失
-  const opacity = Math.max(0, 1 - scrollY / window.innerHeight)
+  const opacity = windowHeight > 0 ? Math.max(0, 1 - scrollY / windowHeight) : 1
   const translateY = scrollY * 0.5 // 视差效果
 
   const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    })
+    if (typeof window !== 'undefined') {
+      window.scrollTo({
+        top: windowHeight || window.innerHeight,
+        behavior: 'smooth'
+      })
+    }
   }
 
   return (
