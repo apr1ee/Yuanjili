@@ -4,6 +4,7 @@ hi 我是李元基，大多时候我会叫自己april。
 如果你想了解更多关于的我经历，这是个不错的开始。
 
 # 项目结构
+```plaintext
 my-portfolio/
 ├── .cache/                  # Gatsby 构建缓存
 ├── node_modules/            # 项目依赖模块
@@ -33,15 +34,17 @@ my-portfolio/
 │   └── templates/           # 页面模板
 │       └── using-dsg.js     # DSG 示例页面模板
 ├── .gitignore               # Git 忽略配置
-├── .prettierignore           # Prettier 忽略配置
-├── .prettierrc               # Prettier 配置
-├── gatsby-browser.js         # 浏览器端配置
-├── gatsby-config.js          # Gatsby 配置
-├── gatsby-node.js            # 构建时配置
-├── gatsby-ssr.js             # 服务端渲染配置
-├── LICENSE                   # 许可证
-├── package.json              # 项目信息和依赖配置
-└── package-lock.json         # 锁定依赖版本
+├── .prettierignore          # Prettier 忽略配置
+├── .prettierrc              # Prettier 配置
+├── gatsby-browser.js        # 浏览器端配置
+├── gatsby-config.js         # Gatsby 配置
+├── gatsby-node.js           # 构建时配置
+├── gatsby-ssr.js            # 服务端渲染配置
+├── LICENSE                  # 许可证
+├── package.json             # 项目信息和依赖配置
+└── package-lock.json        # 锁定依赖版本
+```
+
 
 
 # 依赖包
